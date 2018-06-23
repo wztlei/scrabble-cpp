@@ -26,7 +26,7 @@
 #include <cctype>
 
 #define TILES_FILE_NAME "tiles.txt"
-#define WORDS_FILE_NAME "common_1000_words.txt"
+#define WORDS_FILE_NAME "jonbcard_github_words.txt"
 #define BOARD_FILE_NAME "board.txt"
 #define TESTGAME_FILE_NAME "test_game_across.txt"
 #define NUM_BOARD_ROWS 15
@@ -608,14 +608,15 @@ void find_best_move (SquareGrid board, vector <int> rack,
                      vector <Square> &best_move, int &best_pts)
 {
     // Go through all the squares to check for any squares that have tiles
-    // It will find the best move and exit the function
-    // as soon as it finds a tile
+    // This loop will find the best move for a board with tiles on it 
+    // and exit the function as soon as it finds a tile
     for (int row = 1; row <= NUM_BOARD_ROWS; row++)
     {
         for (int col = 1; col <= NUM_BOARD_COLS; col++)
         {
             // Check to see if the square has a tile
-            // Only find the best move if a square on the board has a tile
+            // Only find the best move for a board with tiles 
+			// if a square on the board has a tile
             if (board[row][col].letter != '.')
             {
                 // Get the best move for placing tiles across and
@@ -642,7 +643,8 @@ void find_best_move (SquareGrid board, vector <int> rack,
                     best_pts = best_down_pts;
                 }
 
-                // Only find the best move once and exit the function
+                // Only find the best move for a board with tiles once 
+				// and exit the function
                 return;
             }
         }
