@@ -22,10 +22,11 @@
 #include <cstdlib>
 #include <vector>
 #include <unordered_map>
+#include <regex>
 #include <cctype>
 
 #define TILES_FILE_NAME "tiles.txt"
-#define WORDS_FILE_NAME "jonbcard_github_words.txt"
+#define WORDS_FILE_NAME "common_1000_words.txt"
 #define BOARD_FILE_NAME "board.txt"
 #define TESTGAME_FILE_NAME "test_game_across.txt"
 #define NUM_BOARD_ROWS 15
@@ -161,7 +162,12 @@ TrieNode* create_word_trie ()
     for (auto itr = global_words.begin(); itr != global_words.end(); itr++)
     {
         string str = itr->first;
-        insert_into_trie(root, str);
+        regex all_uppercase ("[A-Z]+");
+
+        if (str.length() > 2 && regex_match(str, all_uppercase))
+        {
+            insert_into_trie(root, str);
+        }
     }
 
     return root;
