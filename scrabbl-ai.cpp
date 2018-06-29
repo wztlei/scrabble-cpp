@@ -158,11 +158,11 @@ TrieNode* create_word_trie ()
     TrieNode* root = new TrieNode;
     root->letter = '*';
     root->is_terminal_node = false;
+    regex all_uppercase ("[A-Z]+");
 
     for (auto itr = global_words.begin(); itr != global_words.end(); itr++)
     {
         string str = itr->first;
-        regex all_uppercase ("[A-Z]+");
 
         if (str.length() > 2 && regex_match(str, all_uppercase))
         {
@@ -608,14 +608,14 @@ void find_best_move (SquareGrid board, vector <int> rack,
                      vector <Square> &best_move, int &best_pts)
 {
     // Go through all the squares to check for any squares that have tiles
-    // This loop will find the best move for a board with tiles on it 
+    // This loop will find the best move for a board with tiles on it
     // and exit the function as soon as it finds a tile
     for (int row = 1; row <= NUM_BOARD_ROWS; row++)
     {
         for (int col = 1; col <= NUM_BOARD_COLS; col++)
         {
             // Check to see if the square has a tile
-            // Only find the best move for a board with tiles 
+            // Only find the best move for a board with tiles
 			// if a square on the board has a tile
             if (board[row][col].letter != '.')
             {
@@ -643,7 +643,7 @@ void find_best_move (SquareGrid board, vector <int> rack,
                     best_pts = best_down_pts;
                 }
 
-                // Only find the best move for a board with tiles once 
+                // Only find the best move for a board with tiles once
 				// and exit the function
                 return;
             }
@@ -831,9 +831,6 @@ void extend_right (SquareGrid* board, vector <int> rack, TrieNode* node,
 
                 // Place tile back in the rack
                 rack[child_letter_index]++;
-
-                // Move back to the original square
-                curr_square = sqr;
             }
             // Otherwise try using a blank tile
             else if (rack[26] > 0 && sqr.down_cross_check[child_letter_index])
@@ -857,9 +854,6 @@ void extend_right (SquareGrid* board, vector <int> rack, TrieNode* node,
 
                 // Place tile back in the rack
                 rack[26]++;
-
-                // Move back to the original square
-                curr_square = sqr;
             }
         }
     }
@@ -1405,7 +1399,33 @@ void run_scrabble ()
 
 int main()
 {
+
     run_scrabble();
+
+       // Declare a vector and a variable to store
+    // the best move and highest number of points
+       // Get the data for the board
+//    SquareGrid board = read_board_data();
+//    read_test_game_data(board);
+//    string rack_str = "ENTIREE";
+//    vector <int> rack = fill_rack(rack_str);
+//
+//
+//        // Update the state of the board
+//        update_down_cross_checks(board);
+//        update_min_across_word_length(board);
+//
+//    vector <Square> best_move;
+//    int best_pts = 0;
+//
+//    // Declare variables necessary to call the function extend_right()
+//    vector <Square> curr_move;
+//    Square sqr = board[8][1];
+//    int min_word_length = sqr.min_across_word_length;
+//
+//    extend_right(&board, rack, global_trie_root, sqr,
+//                 min_word_length, curr_move, best_move, best_pts);
+//cout << best_move.size();
 
     return 0;
 }
